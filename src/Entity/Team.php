@@ -14,7 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     denormalizationContext: [
         'groups' => ['team:write']
-    ]
+    ],
+    security: 'is_granted("ROLE_USER")'
 )]
 class Team
 {

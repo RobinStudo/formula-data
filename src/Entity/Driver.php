@@ -20,13 +20,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new GetCollection(),
-        new Post(),
+        new Post(
+            security: 'is_granted("ROLE_USER")',
+        ),
         new Get(
             normalizationContext: [
                 'groups' => ['driver:read', 'driver:extra'],
             ]
         ),
-        new Delete(),
+        new Delete(
+            security: 'is_granted("ROLE_ADMIN")',
+        ),
     ],
     normalizationContext: [
         'groups' => ['driver:read']
@@ -37,6 +41,7 @@ class Driver
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['driver:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 120)]

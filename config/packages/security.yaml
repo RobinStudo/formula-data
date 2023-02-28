@@ -25,7 +25,8 @@ security:
             jwt: ~
 
     access_control:
-#        - { path: ^/teams, roles: ROLE_USER }
+#        - { path: ^/auth, roles: PUBLIC_ACCESS }
+#        - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:
