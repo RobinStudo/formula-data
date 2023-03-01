@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Controller\Driver\RandomDriverController;
 use App\Repository\DriverRepository;
 use DateTime;
 use DateTimeInterface;
@@ -20,6 +21,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new GetCollection(),
+        new GetCollection(
+            uriTemplate: '/drivers/random',
+            controller: RandomDriverController::class,
+        ),
         new Post(
             security: 'is_granted("ROLE_USER")',
         ),
