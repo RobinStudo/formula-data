@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\TeamRepository;
+use App\State\TeamLogoStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: [
         'groups' => ['team:write']
     ],
-    security: 'is_granted("ROLE_USER")'
+    security: 'is_granted("ROLE_USER")',
+    provider: TeamLogoStateProvider::class,
 )]
 class Team
 {
@@ -32,6 +34,8 @@ class Team
 
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Driver::class)]
     private Collection $drivers;
+
+    private string $logo;
 
     public function __construct()
     {
@@ -77,6 +81,18 @@ class Team
                 $driver->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogo(): string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }
