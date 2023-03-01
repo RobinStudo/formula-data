@@ -17,3 +17,7 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
             $itemProvider: '@api_platform.doctrine.orm.state.item_provider'
+
+    App\State\UserPasswordStateProcessor:
+        bind:
+            $persistProcessor: '@api_platform.doctrine.orm.state.persist_processor'
