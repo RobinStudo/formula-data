@@ -20,7 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: DriverRepository::class)]
 #[ApiResource(
     operations: [
-        new GetCollection(),
+        new GetCollection(
+            paginationItemsPerPage: 1,
+        ),
         new GetCollection(
             uriTemplate: '/drivers/random',
             controller: RandomDriverController::class,
